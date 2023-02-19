@@ -48,6 +48,4 @@ public class Inventory {
  * + updateProduct(index:int, newProduct:Product):void
  * + deletePart(selectedPart:Part):boolean
  * + deleteProduct(selectedProduct:Product):boolean
- * + getAllParts():ObservableList<Part>
- * + getAllProducts():ObservableList<Product>
  */

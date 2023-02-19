@@ -107,7 +107,7 @@ public class MainScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         partsTable.setItems(Inventory.getAllParts());
         System.out.println(Inventory.getAllParts());
-        // productsTable.setItems(Inventory.getAllProducts());
+        productsTable.setItems(Inventory.getAllProducts());
 
         partId.setCellValueFactory(new PropertyValueFactory<>("id"));
         partName.setCellValueFactory(new PropertyValueFactory<>("name"));
