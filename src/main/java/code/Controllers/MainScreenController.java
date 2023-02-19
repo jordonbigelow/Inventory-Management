@@ -3,6 +3,8 @@ package code.Controllers;
 import code.Models.Inventory;
 import code.Models.Part;
 import code.Models.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static java.lang.Integer.parseInt;
 
 public class MainScreenController implements Initializable {
     @FXML
@@ -128,5 +132,41 @@ public class MainScreenController implements Initializable {
         productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryList.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productCostPerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    public void handlePartLookup(ActionEvent actionEvent) {
+        ObservableList<Part> foundParts = FXCollections.observableArrayList();
+        String text = partsSearchField.getText();
+        try {
+            int id = parseInt(text);
+            Part foundPart = Inventory.lookupPart(id);
+
+            if (foundPart != null) {
+                foundParts.add(foundPart);
+                partsTable.setItems(foundParts);
+            }
+        } catch (NumberFormatException e) {
+            if (text.isBlank() || text.isEmpty()) {
+                partsTable.setItems(Inventory.getAllParts());
+            }
+        }
+    }
+
+    public void handleProductLookup(ActionEvent actionEvent) {
+        ObservableList<Product> foundProducts = FXCollections.observableArrayList();
+        String text = productsSearchField.getText();
+        try {
+            int id = parseInt(text);
+            Product foundProduct = Inventory.lookupProduct(id);
+
+            if (foundProduct != null) {
+                foundProducts.add(foundProduct);
+                productsTable.setItems(foundProducts);
+            }
+        } catch (NumberFormatException e) {
+            if (text.isBlank() || text.isEmpty()) {
+                productsTable.setItems(Inventory.getAllParts());
+            }
+        }
     }
 }

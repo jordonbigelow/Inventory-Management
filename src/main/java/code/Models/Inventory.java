@@ -44,12 +44,26 @@ public class Inventory {
         return allProducts.remove(selectedProduct);
     }
 
-    public static Part lookupPart(int partID) {
+    public static Part lookupPart(int partId) {
+        ObservableList<Part> allParts = Inventory.getAllParts();
 
+        for (Part part : allParts) {
+            if (part.getId() == partId) {
+                return part;
+            }
+        }
+        return null;
     }
 
     public static Product lookupProduct(int productId) {
+        ObservableList<Product> allProducts = Inventory.getAllProducts();
 
+        for (Product product : allProducts) {
+            if (product.getId() == productId) {
+                return product;
+            }
+        }
+        return null;
     }
 }
 /**
