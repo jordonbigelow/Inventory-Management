@@ -3,8 +3,8 @@ module com.example.c482_project {
     requires javafx.fxml;
 
 
-    opens com.example.c482_project to javafx.fxml;
-    exports com.example.c482_project;
-    exports com.example.c482_project.Controllers;
-    opens com.example.c482_project.Controllers to javafx.fxml;
+    opens code to javafx.fxml;
+    exports code;
+    exports code.Controllers;
+    opens code.Controllers to javafx.fxml;
 }

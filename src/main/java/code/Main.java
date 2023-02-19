@@ -1,4 +1,4 @@
-package com.example.c482_project;
+package code;
 
 import  javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +16,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-    private static void addTestData() {
-        // TODO Add test data here
-    }
     public static void main(String[] args) {
-        // TODO Include test data in the future...
-        // addTestData();
-
         launch();
     }
 }

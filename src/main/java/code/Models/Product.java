@@ -1,19 +1,9 @@
-package com.example.c482_project.Models;
+package code.Models;
 
 import javafx.collections.ObservableList;
 
 public class Product {
-    /**
-     *
-     * @param id
-     * @param name
-     * @param price
-     * @param stock
-     * @param min
-     * @param max
-     */
     public Product(int id, String name, double price, int stock, int min, int max) {
-
         this.id = id;
         this.name = name;
         this.price = price;

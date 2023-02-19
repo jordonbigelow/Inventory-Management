@@ -1,4 +1,4 @@
-package com.example.c482_project.Models;
+package code.Models;
 
 /**
  * Supplied class Part.java

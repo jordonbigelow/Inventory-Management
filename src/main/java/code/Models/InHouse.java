@@ -1,4 +1,4 @@
-package com.example.c482_project.Models;
+package code.Models;
 
 public class InHouse extends Part{
     private int machineId;
