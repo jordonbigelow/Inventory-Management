@@ -25,7 +25,7 @@
               </columns>
             </TableView>
             <Label layoutX="6.0" layoutY="6.0" text="Parts" />
-            <TextField fx:id="partsSearchField" layoutX="314.0" layoutY="6.0" onAction="#handlePartLookup" promptText="Part Id" />
+            <TextField fx:id="partsSearchField" layoutX="314.0" layoutY="6.0" onAction="#handlePartLookup" promptText="Part Id/Name" />
          </children>
       </AnchorPane>
       <Button fx:id="exitButton" layoutX="915.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleExitButtonAction" text="Exit" />
@@ -43,7 +43,7 @@
                </columns>
             </TableView>
             <Label layoutX="14.0" layoutY="9.0" text="Products" />
-            <TextField fx:id="productsSearchField" layoutX="305.0" layoutY="6.0" onAction="#handleProductLookup" promptText="Product Id" />
+            <TextField fx:id="productsSearchField" layoutX="305.0" layoutY="6.0" onAction="#handleProductLookup" promptText="Product Id/Name" />
          </children>
       </AnchorPane>
    </children>
