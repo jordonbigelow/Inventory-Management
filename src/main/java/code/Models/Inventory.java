@@ -100,8 +100,6 @@ public class Inventory {
         }
         return foundProducts;
     }
-    public static int nextPartsId = allParts.size() + 1;
-    public static int nextProductsId = allProducts.size() + 1;
 }
 /**
  * + updatePart(index:int, selectedPart:Part):void
