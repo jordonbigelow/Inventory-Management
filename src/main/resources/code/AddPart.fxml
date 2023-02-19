@@ -11,16 +11,19 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <RadioButton fx:id="inHouseRadio" layoutX="183.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleInHouseButtonAction" selected="true" text="In-House" />
-      <RadioButton fx:id="outsourcedRadio" layoutX="300.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleOutsourcedRadioAction" text="Outsourced" />
+      <RadioButton fx:id="inHouseRadio" layoutX="183.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleInHouseRadioAction" selected="true" text="In-House">
+         <toggleGroup>
+            <ToggleGroup fx:id="tGroup" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="outsourcedRadio" layoutX="300.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleOutsourcedRadioAction" text="Outsourced" toggleGroup="$tGroup" />
       <Label layoutX="45.0" layoutY="84.0" text="ID" />
       <Label layoutX="45.0" layoutY="117.0" text="Name" />
       <Label layoutX="45.0" layoutY="151.0" text="Inventory" />
       <Label layoutX="45.0" layoutY="184.0" text="Price/Cost" />
       <Label layoutX="45.0" layoutY="216.0" text="Maximum" />
-      <Label layoutX="45.0" layoutY="250.0" text="Machine ID" />
+      <Label fx:id="changeableText" layoutX="45.0" layoutY="250.0" text="Machine ID" />
       <Label layoutX="315.0" layoutY="213.0" text="Minimum" />
-      <TextField fx:id="machineId" layoutX="140.0" layoutY="245.0" />
+      <TextField fx:id="changeableField" layoutX="140.0" layoutY="245.0" />
       <TextField fx:id="maximumField" layoutX="140.0" layoutY="211.0" />
       <TextField fx:id="priceField" layoutX="140.0" layoutY="179.0" />
       <TextField fx:id="inventoryField" layoutX="140.0" layoutY="146.0" />

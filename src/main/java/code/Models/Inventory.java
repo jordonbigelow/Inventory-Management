@@ -14,18 +14,28 @@ public class Inventory {
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
+    // Test Data
     static {
         addTestData();
     }
+    // Test Data
     private static void addTestData() {
         Part testPart1 = new InHouse(1, "tire", 29.99, 5, 1, 5, 1);
         Inventory.addPart(testPart1);
         Part testPart2 = new InHouse(2, "seat", 5.99, 25, 1, 25, 2);
         Inventory.addPart(testPart2);
+        Part testPart3 = new InHouse(3, "air tube", 15.99, 15, 1, 15, 3);
+        Inventory.addPart(testPart3);
+        Part testPart4 = new InHouse(4, "bell", 7.99, 10, 1, 10, 4);
+        Inventory.addPart(testPart4);
         Product testProduct1 = new Product(1, "bike", 199.99, 10, 1, 10);
         Inventory.addProduct(testProduct1);
         Product testProduct2 = new Product(2, "scooter", 99.99, 10, 1, 10);
         Inventory.addProduct(testProduct2);
+        Product testProduct3 = new Product(3, "tricycle", 79.99, 10, 1, 10);
+        Inventory.addProduct(testProduct3);
+        Product testProduct4 = new Product(4, "skateboard", 49.99, 10, 1, 10);
+        Inventory.addProduct(testProduct4);
     }
 
     public static ObservableList<Part> getAllParts() {

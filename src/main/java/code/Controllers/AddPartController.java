@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,7 +15,7 @@ import java.io.IOException;
 public class AddPartController {
     public RadioButton inHouseRadio;
     public RadioButton outsourcedRadio;
-    public TextField machineId;
+    public TextField changeableField;
     public TextField maximumField;
     public TextField priceField;
     public TextField inventoryField;
@@ -23,11 +24,14 @@ public class AddPartController {
     public TextField minimumField;
     public Button saveButton;
     public Button cancelButton;
+    public Label changeableText;
 
-    public void handleInHouseButtonAction(ActionEvent actionEvent) {
+    public void handleInHouseRadioAction(ActionEvent actionEvent) {
+        changeableText.setText("Machine Id");
     }
 
     public void handleOutsourcedRadioAction(ActionEvent actionEvent) {
+        changeableText.setText("Company Name");
     }
 
     public void handleSaveButtonAction(ActionEvent actionEvent) {
@@ -42,4 +46,6 @@ public class AddPartController {
         stage.setScene(scene);
         stage.show();
     }
+
+
 }
