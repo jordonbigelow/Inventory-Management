@@ -37,31 +37,27 @@ public class Inventory {
     }
 
     public static Boolean deletePart(Part selectedPart) {
-        if (allParts.remove(selectedPart)) {
-            return true;
-        } else {
-            return false;
-        }
+        return allParts.remove(selectedPart);
     }
 
     public static boolean deleteProduct(Product selectedProduct) {
-        if (allProducts.remove(selectedProduct)) {
-            return true;
-        } else {
-            return false;
-        }
+        return allProducts.remove(selectedProduct);
+    }
+
+    public static Part lookupPart(int partID) {
+
+    }
+
+    public static Product lookupProduct(int productId) {
+
     }
 }
 /**
- * + addPart(newPart:Part):void
- * + addProduct(newProduct:Product):void
  * + lookupPart(partId:int):Part
  * + lookupProduct(productId:int):Product
  *
- *
  * + lookupPart(partName:String):ObservableList<Part>
- * + lookupProduct(productName:String):ObservableList<Product> + updatePart(index:int, selectedPart:Part):void
+ * + lookupProduct(productName:String):ObservableList<Product>
+ * + updatePart(index:int, selectedPart:Part):void
  * + updateProduct(index:int, newProduct:Product):void
- * + deletePart(selectedPart:Part):boolean
- * + deleteProduct(selectedProduct:Product):boolean
  */

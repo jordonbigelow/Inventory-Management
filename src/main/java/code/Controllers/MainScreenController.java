@@ -86,6 +86,9 @@ public class MainScreenController implements Initializable {
     }
     public void handleDeletePartButtonAction(ActionEvent actionEvent) {
         Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
+        if (selectedPart == null) {
+            return;
+        }
         Inventory.deletePart(selectedPart);
     }
     public void handleAddProductsButtonAction(ActionEvent actionEvent) throws IOException {
@@ -106,6 +109,9 @@ public class MainScreenController implements Initializable {
     }
     public void handleDeleteProductsButtonAction(ActionEvent actionEvent) throws IOException {
         Product selectedProduct = (Product) productsTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) {
+            return;
+        }
         Inventory.deleteProduct(selectedProduct);
     }
     @Override
