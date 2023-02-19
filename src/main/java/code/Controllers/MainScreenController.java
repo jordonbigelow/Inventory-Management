@@ -133,9 +133,6 @@ public class MainScreenController implements Initializable {
         productName.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryList.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productCostPerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        System.out.println(nextPartsId);
-        System.out.println(nextProductsId);
     }
 
     public void handlePartLookup(ActionEvent actionEvent) {

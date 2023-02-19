@@ -38,6 +38,7 @@ public class AddPartController {
     }
 
     public void handleSaveButtonAction(ActionEvent actionEvent) {
+
     }
 
     public void handleCancelButtonAction(ActionEvent actionEvent) throws IOException {
