@@ -65,13 +65,35 @@ public class Inventory {
         }
         return null;
     }
+
+    public static ObservableList<Part> lookupPart(String partName) {
+        ObservableList<Part> allParts = Inventory.getAllParts();
+        ObservableList<Part> foundParts = FXCollections.observableArrayList();
+
+        for (Part part : allParts) {
+            if (part.getName().contains(partName)) {
+                foundParts.add(part);
+            }
+        }
+        return foundParts;
+    }
+
+    public static ObservableList<Product> lookupProduct(String productName) {
+        ObservableList<Product> allProducts = Inventory.getAllProducts();
+        ObservableList<Product> foundProducts = FXCollections.observableArrayList();
+
+        for (Product product : allProducts) {
+            if (product.getName().contains(productName)) {
+                foundProducts.add(product);
+            }
+        }
+        return foundProducts;
+    }
 }
 /**
- * + lookupPart(partId:int):Part
- * + lookupProduct(productId:int):Product
- *
  * + lookupPart(partName:String):ObservableList<Part>
  * + lookupProduct(productName:String):ObservableList<Product>
+ *
  * + updatePart(index:int, selectedPart:Part):void
  * + updateProduct(index:int, newProduct:Product):void
  */

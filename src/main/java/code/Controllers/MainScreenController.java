@@ -146,7 +146,10 @@ public class MainScreenController implements Initializable {
                 partsTable.setItems(foundParts);
             }
         } catch (NumberFormatException e) {
-            if (text.isBlank() || text.isEmpty()) {
+            if (!text.isBlank() || !text.isEmpty()) {
+                ObservableList<Part> foundPartsList = Inventory.lookupPart(text);
+                partsTable.setItems(foundPartsList);
+            } else {
                 partsTable.setItems(Inventory.getAllParts());
             }
         }
@@ -164,8 +167,11 @@ public class MainScreenController implements Initializable {
                 productsTable.setItems(foundProducts);
             }
         } catch (NumberFormatException e) {
-            if (text.isBlank() || text.isEmpty()) {
-                productsTable.setItems(Inventory.getAllParts());
+            if (!text.isBlank() || !text.isEmpty()) {
+                ObservableList<Product> foundProductsList = Inventory.lookupProduct(text);
+                productsTable.setItems(foundProductsList);
+            } else {
+                productsTable.setItems(Inventory.getAllProducts());
             }
         }
     }
