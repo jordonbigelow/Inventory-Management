@@ -2,6 +2,7 @@ package code.Controllers;
 
 import code.Models.Inventory;
 import code.Models.Part;
+import code.Models.Product;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,6 +105,8 @@ public class MainScreenController implements Initializable {
         stage.show();
     }
     public void handleDeleteProductsButtonAction(ActionEvent actionEvent) throws IOException {
+        Product selectedProduct = (Product) productsTable.getSelectionModel().getSelectedItem();
+        Inventory.deleteProduct(selectedProduct);
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

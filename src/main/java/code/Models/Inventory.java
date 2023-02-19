@@ -40,7 +40,14 @@ public class Inventory {
         if (allParts.remove(selectedPart)) {
             return true;
         } else {
-            System.out.println("couldn't find the item");
+            return false;
+        }
+    }
+
+    public static boolean deleteProduct(Product selectedProduct) {
+        if (allProducts.remove(selectedProduct)) {
+            return true;
+        } else {
             return false;
         }
     }
