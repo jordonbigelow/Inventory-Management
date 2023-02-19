@@ -84,6 +84,8 @@ public class MainScreenController implements Initializable {
         stage.show();
     }
     public void handleDeletePartButtonAction(ActionEvent actionEvent) {
+        Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
+        Inventory.deletePart(selectedPart);
     }
     public void handleAddProductsButtonAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/AddProduct.fxml"));
@@ -101,17 +103,21 @@ public class MainScreenController implements Initializable {
         stage.setScene(new Scene(root1));
         stage.show();
     }
-    public void handleDeleteProductsButtonAction(ActionEvent actionEvent) throws IOException{
+    public void handleDeleteProductsButtonAction(ActionEvent actionEvent) throws IOException {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         partsTable.setItems(Inventory.getAllParts());
-        System.out.println(Inventory.getAllParts());
         productsTable.setItems(Inventory.getAllProducts());
 
         partId.setCellValueFactory(new PropertyValueFactory<>("id"));
         partName.setCellValueFactory(new PropertyValueFactory<>("name"));
         inventoryLevel.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partCostPerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        productId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        inventoryList.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productCostPerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 }

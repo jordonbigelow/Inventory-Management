@@ -35,6 +35,15 @@ public class Inventory {
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
+
+    public static Boolean deletePart(Part selectedPart) {
+        if (allParts.remove(selectedPart)) {
+            return true;
+        } else {
+            System.out.println("couldn't find the item");
+            return false;
+        }
+    }
 }
 /**
  * + addPart(newPart:Part):void
