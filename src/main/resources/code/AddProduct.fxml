@@ -6,24 +6,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #E0EDF4;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.Controllers.AddProductController">
    <children>
-      <Label layoutX="30.0" layoutY="64.0" text="ID" />
-      <Label layoutX="29.0" layoutY="100.0" text="Name" />
-      <Label layoutX="249.0" layoutY="210.0" text="Minimum" />
-      <Label layoutX="26.0" layoutY="211.0" text="Maximum" />
-      <Label layoutX="26.0" layoutY="174.0" prefHeight="17.0" prefWidth="33.0" text="Price" />
-      <Label layoutX="27.0" layoutY="137.0" text="Inventory" />
       <Label layoutX="26.0" layoutY="14.0" text="Add Product">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField disable="true" editable="false" layoutX="121.0" layoutY="60.0" prefHeight="26.0" prefWidth="120.0" promptText="Auto-Gen Disabled" />
-      <TextField layoutX="121.0" layoutY="96.0" prefHeight="26.0" prefWidth="120.0" />
-      <TextField layoutX="121.0" layoutY="205.0" prefHeight="26.0" prefWidth="120.0" />
-      <TextField layoutX="121.0" layoutY="132.0" prefHeight="26.0" prefWidth="120.0" />
-      <TextField layoutX="121.0" layoutY="169.0" prefHeight="26.0" prefWidth="120.0" />
-      <TextField layoutX="309.0" layoutY="207.0" prefHeight="26.0" prefWidth="120.0" />
-      <TableView layoutX="441.0" layoutY="45.0" prefHeight="200.0" prefWidth="400.0">
+      <Label layoutX="26.0" layoutY="64.0" text="ID" />
+      <Label layoutX="26.0" layoutY="100.0" text="Name" />
+      <Label layoutX="26.0" layoutY="137.0" text="Inventory" />
+      <Label layoutX="26.0" layoutY="174.0" prefHeight="17.0" prefWidth="33.0" text="Price" />
+      <Label layoutX="26.0" layoutY="211.0" text="Minimum" />
+      <Label layoutX="249.0" layoutY="211.0" text="Maximum" />
+      <TextField fx:id="idField" disable="true" editable="false" layoutX="121.0" layoutY="60.0" prefHeight="26.0" prefWidth="120.0" promptText="Auto-Gen Disabled" />
+      <TextField fx:id="nameField" layoutX="121.0" layoutY="96.0" prefHeight="26.0" prefWidth="120.0" />
+      <TextField fx:id="inventoryField" layoutX="121.0" layoutY="132.0" prefHeight="26.0" prefWidth="120.0" />
+      <TextField fx:id="priceField" layoutX="121.0" layoutY="169.0" prefHeight="26.0" prefWidth="120.0" />
+      <TextField fx:id="minimumField" layoutX="121.0" layoutY="205.0" prefHeight="26.0" prefWidth="120.0" />
+      <TextField fx:id="maximumField" layoutX="309.0" layoutY="205.0" prefHeight="26.0" prefWidth="120.0" />
+      <TextField fx:id="searchField" layoutX="681.0" layoutY="13.0" />
+      <TableView layoutX="440.0" layoutY="45.0" prefHeight="200.0" prefWidth="400.0">
         <columns>
           <TableColumn prefWidth="75.0" text="Part ID" />
           <TableColumn prefWidth="100.0" text="Part Name" />
@@ -31,9 +32,8 @@
             <TableColumn prefWidth="132.0" text="Price/Cost Per Unit" />
         </columns>
       </TableView>
-      <TextField layoutX="680.0" layoutY="13.0" />
       <Button layoutX="800.0" layoutY="250.0" mnemonicParsing="false" text="Add" />
-      <TableView layoutX="439.0" layoutY="281.0" prefHeight="200.0" prefWidth="400.0">
+      <TableView layoutX="440.0" layoutY="281.0" prefHeight="200.0" prefWidth="400.0">
          <columns>
             <TableColumn prefWidth="75.0" text="Part ID" />
             <TableColumn prefWidth="100.0" text="Part Name" />
@@ -41,8 +41,8 @@
             <TableColumn prefWidth="132.0" text="Price/Cost Per Unit" />
          </columns>
       </TableView>
-      <Button layoutX="686.0" layoutY="487.0" mnemonicParsing="false" text="Remove Associated Part" />
-      <Button layoutX="731.0" layoutY="518.0" mnemonicParsing="false" text="Save" />
-      <Button layoutX="781.0" layoutY="518.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="690.0" layoutY="487.0" mnemonicParsing="false" text="Remove Associated Part" />
+      <Button layoutX="735.0" layoutY="518.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="785.0" layoutY="518.0" mnemonicParsing="false" text="Cancel" />
    </children>
 </AnchorPane>

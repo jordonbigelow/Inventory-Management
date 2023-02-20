@@ -13,27 +13,25 @@
       </Label>
       <AnchorPane layoutX="3.0" layoutY="61.0" prefHeight="253.0" prefWidth="485.0" style="-fx-border-color: grey; -fx-border-radius: 5px; -fx-background-color: white;">
          <children>
-            <Button fx:id="partsDeleteButton" layoutX="419.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleDeletePartButtonAction" text="Delete" />
-            <Button fx:id="partsModifyButton" layoutX="356.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleModifyPartButtonAction" text="Modify" />
-            <Button fx:id="partsAddButton" layoutX="308.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleAddPartButtonAction" text="Add" />
-            <TableView fx:id="partsTable" layoutX="12.0" layoutY="35.0" prefHeight="176.0" prefWidth="462.0">
-              <columns>
-                <TableColumn fx:id="partId" prefWidth="55.0" text="Part Id" />
-                <TableColumn fx:id="partName" prefWidth="123.0" text="Part Name" />
-                  <TableColumn fx:id="inventoryLevel" prefWidth="138.0" text="Inventory Level" />
-                  <TableColumn fx:id="partCostPerUnit" prefWidth="144.0" text="Price/Cost Per Unit" />
-              </columns>
-            </TableView>
             <Label layoutX="6.0" layoutY="6.0" text="Parts" />
             <TextField fx:id="partsSearchField" layoutX="314.0" layoutY="6.0" onAction="#handlePartLookup" promptText="Part Id/Name" />
+            <TableView fx:id="partsTable" layoutX="12.0" layoutY="35.0" prefHeight="176.0" prefWidth="462.0">
+               <columns>
+                  <TableColumn fx:id="partId" prefWidth="55.0" text="Part Id" />
+                  <TableColumn fx:id="partName" prefWidth="123.0" text="Part Name" />
+                  <TableColumn fx:id="inventoryLevel" prefWidth="138.0" text="Inventory Level" />
+                  <TableColumn fx:id="partCostPerUnit" prefWidth="144.0" text="Price/Cost Per Unit" />
+               </columns>
+            </TableView>
+            <Button fx:id="partsAddButton" layoutX="308.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleAddPartButtonAction" text="Add" />
+            <Button fx:id="partsModifyButton" layoutX="356.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleModifyPartButtonAction" text="Modify" />
+            <Button fx:id="partsDeleteButton" layoutX="419.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleDeletePartButtonAction" text="Delete" />
          </children>
       </AnchorPane>
-      <Button fx:id="exitButton" layoutX="915.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleExitButtonAction" text="Exit" />
       <AnchorPane layoutX="490.0" layoutY="61.0" prefHeight="253.0" prefWidth="472.0" style="-fx-border-color: grey; -fx-border-radius: 5px; -fx-background-color: white;">
          <children>
-            <Button fx:id="productsDeleteButton" layoutX="412.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleDeleteProductsButtonAction" text="Delete" />
-            <Button fx:id="productsModifyButton" layoutX="349.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleModifyProductsButtonAction" text="Modify" />
-            <Button fx:id="productsAddButton" layoutX="301.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleAddProductsButtonAction" text="Add" />
+            <Label layoutX="14.0" layoutY="9.0" text="Products" />
+            <TextField fx:id="productsSearchField" layoutX="305.0" layoutY="6.0" onAction="#handleProductLookup" promptText="Product Id/Name" />
             <TableView fx:id="productsTable" layoutX="11.0" layoutY="35.0" prefHeight="176.0" prefWidth="454.0">
                <columns>
                   <TableColumn fx:id="productId" prefWidth="76.0" text="Product ID" />
@@ -42,9 +40,11 @@
                   <TableColumn fx:id="productCostPerUnit" prefWidth="136.0" text="Price/Cost Per Unit" />
                </columns>
             </TableView>
-            <Label layoutX="14.0" layoutY="9.0" text="Products" />
-            <TextField fx:id="productsSearchField" layoutX="305.0" layoutY="6.0" onAction="#handleProductLookup" promptText="Product Id/Name" />
+            <Button fx:id="productsAddButton" layoutX="301.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleAddProductsButtonAction" text="Add" />
+            <Button fx:id="productsModifyButton" layoutX="349.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleModifyProductsButtonAction" text="Modify" />
+            <Button fx:id="productsDeleteButton" layoutX="412.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleDeleteProductsButtonAction" text="Delete" />
          </children>
       </AnchorPane>
+      <Button fx:id="exitButton" layoutX="918.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleExitButtonAction" text="Exit" />
    </children>
 </AnchorPane>
