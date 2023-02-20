@@ -29,6 +29,10 @@ public class Inventory {
         Inventory.addPart(testPart3);
         Part testPart4 = new InHouse(4, "bell", 7.99, 10, 1, 10, 4);
         Inventory.addPart(testPart4);
+        Part testPart5 = new Outsourced(5, "microchip", 15.99, 15, 1, 15, "testCompany");
+        Inventory.addPart(testPart5);
+        Part testPart6 = new Outsourced(6, "laptop", 799.99, 10, 1, 10, "testCompany2");
+        Inventory.addPart(testPart6);
         Product testProduct1 = new Product(1, "bike", 199.99, 10, 1, 10);
         Inventory.addProduct(testProduct1);
         Product testProduct2 = new Product(2, "scooter", 99.99, 10, 1, 10);

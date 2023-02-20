@@ -42,7 +42,7 @@ public class AddPartController {
         changeableText.setText("Company Name");
     }
 
-    public void handleSaveButtonAction(ActionEvent actionEvent) {
+    public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
         if (inHouseRadio.isSelected()) {
             InHouse inHousePart = new InHouse(
                     nextPartsId,
@@ -55,6 +55,13 @@ public class AddPartController {
                     );
             nextPartsId += 1;
             Inventory.addPart(inHousePart);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+            Scene scene= new Scene(root1,966,361);
+            stage.setTitle("Inventory CRM");
+            stage.setScene(scene);
+            stage.show();
         } else if (outsourcedRadio.isSelected()) {
             Outsourced outSourcedPart = new Outsourced(
                     nextProductsId,
@@ -67,6 +74,13 @@ public class AddPartController {
             );
             nextProductsId += 1;
             Inventory.addPart(outSourcedPart);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+            Scene scene= new Scene(root1,966,361);
+            stage.setTitle("Inventory CRM");
+            stage.setScene(scene);
+            stage.show();
         }
     }
 

@@ -65,7 +65,6 @@ public class MainScreenController implements Initializable {
     @FXML
     public TableColumn partCostPerUnit;
 
-
     public void handleExitButtonAction() {
         System.exit(0);
     }
@@ -82,6 +81,14 @@ public class MainScreenController implements Initializable {
 
     @FXML
     public void handleModifyPartButtonAction(ActionEvent event) throws IOException {
+        Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
+        if (selectedPart == null) {
+            return;
+        }
+        ModifyPartController.setSelectedPart(selectedPart);
+
+        // TODO pass the selected part to the modify part controller
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/ModifyPart.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
