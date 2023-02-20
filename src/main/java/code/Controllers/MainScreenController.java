@@ -94,6 +94,7 @@ public class MainScreenController implements Initializable {
         if (selectedPart == null) {
             return;
         }
+        nextPartsId -= 1;
         Inventory.deletePart(selectedPart);
     }
     public void handleAddProductsButtonAction(ActionEvent actionEvent) throws IOException {

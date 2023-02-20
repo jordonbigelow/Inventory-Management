@@ -1,5 +1,8 @@
 package code.Controllers;
 
+import code.Models.InHouse;
+import code.Models.Inventory;
+import code.Models.Outsourced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static code.Models.Inventory.nextPartsId;
+import static code.Models.Inventory.nextProductsId;
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 
 public class AddPartController {
     public RadioButton inHouseRadio;
@@ -35,7 +43,31 @@ public class AddPartController {
     }
 
     public void handleSaveButtonAction(ActionEvent actionEvent) {
-
+        if (inHouseRadio.isSelected()) {
+            InHouse inHousePart = new InHouse(
+                    nextPartsId,
+                    nameField.getText(),
+                    parseDouble(priceField.getText()),
+                    parseInt(inventoryField.getText()),
+                    parseInt(minimumField.getText()),
+                    parseInt(maximumField.getText()),
+                    parseInt(changeableField.getText())
+                    );
+            nextPartsId += 1;
+            Inventory.addPart(inHousePart);
+        } else if (outsourcedRadio.isSelected()) {
+            Outsourced outSourcedPart = new Outsourced(
+                    nextProductsId,
+                    nameField.getText(),
+                    parseDouble(priceField.getText()),
+                    parseInt(inventoryField.getText()),
+                    parseInt(minimumField.getText()),
+                    parseInt(maximumField.getText()),
+                    changeableField.getText()
+            );
+            nextProductsId += 1;
+            Inventory.addPart(outSourcedPart);
+        }
     }
 
     public void handleCancelButtonAction(ActionEvent actionEvent) throws IOException {
