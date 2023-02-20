@@ -41,8 +41,8 @@
             <TableColumn prefWidth="132.0" text="Price/Cost Per Unit" />
          </columns>
       </TableView>
-      <Button layoutX="688.0" layoutY="487.0" mnemonicParsing="false" text="Remove Associated Part" />
-      <Button layoutX="688.0" layoutY="518.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="686.0" layoutY="487.0" mnemonicParsing="false" text="Remove Associated Part" />
+      <Button layoutX="731.0" layoutY="518.0" mnemonicParsing="false" text="Save" />
       <Button layoutX="781.0" layoutY="518.0" mnemonicParsing="false" text="Cancel" />
    </children>
 </AnchorPane>
