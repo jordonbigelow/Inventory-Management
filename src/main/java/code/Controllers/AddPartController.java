@@ -12,9 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static code.Models.Inventory.nextPartsId;
-import static code.Models.Inventory.nextProductsId;
-
 public class AddPartController {
     public RadioButton inHouseRadio;
     public RadioButton outsourcedRadio;
