@@ -62,7 +62,8 @@ public class ModifyPartController implements Initializable {
         if (selectedPart instanceof InHouse) {
             changeableText.setText("Machine Id");
             inHouseRadio.setSelected(true);
-            
+
+            idField.setText(Integer.toString(selectedPart.getId()));
             nameField.setText(selectedPart.getName());
             inventoryField.setText(Integer.toString(selectedPart.getStock()));
             priceField.setText(Double.toString(selectedPart.getPrice()));
@@ -73,6 +74,7 @@ public class ModifyPartController implements Initializable {
             changeableText.setText("Company Name");
             outsourcedRadio.setSelected(true);
 
+            idField.setText(Integer.toString(selectedPart.getId()));
             nameField.setText(selectedPart.getName());
             inventoryField.setText(Integer.toString(selectedPart.getStock()));
             priceField.setText(Double.toString(selectedPart.getPrice()));

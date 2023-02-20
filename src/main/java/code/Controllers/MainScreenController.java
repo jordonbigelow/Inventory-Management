@@ -87,8 +87,6 @@ public class MainScreenController implements Initializable {
         }
         ModifyPartController.setSelectedPart(selectedPart);
 
-        // TODO pass the selected part to the modify part controller
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/ModifyPart.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
