@@ -94,6 +94,9 @@ public class MainScreenController implements Initializable {
         if (selectedPart == null) {
             return;
         }
+        // decrementing here needs to be looked at differently
+        // I need a better solution at generating ids
+        // this is in a todo
         nextPartsId -= 1;
         Inventory.deletePart(selectedPart);
     }

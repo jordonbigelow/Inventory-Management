@@ -100,7 +100,8 @@ public class Inventory {
         }
         return foundProducts;
     }
-
+    // TODO come up with a better way to generate ID numbers this one sucks
+    // it creates duplicate numbers if items are deleted
     public static int nextPartsId = allParts.size() + 1;
     public static int nextProductsId = allProducts.size() + 1;
 }
