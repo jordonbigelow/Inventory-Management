@@ -4,7 +4,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" style="-fx-background-color: #E0EDF4;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.Controllers.ModifyProductController">
+<AnchorPane maxHeight="-Infinity"
+            maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefHeight="550.0"
+            prefWidth="850.0"
+            style="-fx-background-color: #E0EDF4;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="code.Controllers.ModifyProductController"
+>
    <children>
       <Label layoutX="26.0" layoutY="64.0" text="ID" />
       <Label layoutX="26.0" layoutY="100.0" text="Name" />
