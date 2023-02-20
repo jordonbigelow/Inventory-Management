@@ -74,7 +74,7 @@ public class MainScreenController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/AddPart.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        Scene scene= new Scene(root1,600,400);
+        Scene scene = new Scene(root1,600,400);
         stage.setTitle("Add Part");
         stage.setScene(scene);
         stage.show();
@@ -84,9 +84,10 @@ public class MainScreenController implements Initializable {
     public void handleModifyPartButtonAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/ModifyPart.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root1, 600, 400);
         stage.setTitle("Modify Part");
-        stage.setScene(new Scene(root1));
+        stage.setScene(scene);
         stage.show();
     }
     public void handleDeletePartButtonAction(ActionEvent actionEvent) {
