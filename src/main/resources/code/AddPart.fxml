@@ -21,14 +21,14 @@
       <Label layoutX="45.0" layoutY="151.0" text="Inventory" />
       <Label layoutX="45.0" layoutY="184.0" text="Price/Cost" />
       <Label layoutX="45.0" layoutY="216.0" text="Minimum" />
-      <Label layoutX="315.0" layoutY="213.0" text="Maximum" />
+      <Label layoutX="315.0" layoutY="216.0" text="Maximum" />
       <Label fx:id="changeableText" layoutX="45.0" layoutY="250.0" text="Machine ID" />
       <TextField fx:id="idField" disable="true" editable="false" layoutX="140.0" layoutY="79.0" promptText="Auto-Gen Disabled" />
       <TextField fx:id="nameField" layoutX="140.0" layoutY="112.0" />
       <TextField fx:id="inventoryField" layoutX="140.0" layoutY="146.0" />
       <TextField fx:id="priceField" layoutX="140.0" layoutY="179.0" />
       <TextField fx:id="minimumField" layoutX="140.0" layoutY="211.0" />
-      <TextField fx:id="maximumField" layoutX="377.0" layoutY="209.0" />
+      <TextField fx:id="maximumField" layoutX="377.0" layoutY="211.0" />
       <TextField fx:id="changeableField" layoutX="140.0" layoutY="245.0" />
       <Button fx:id="saveButton" layoutX="467.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleSaveButtonAction" text="Save" />
       <Button fx:id="cancelButton" layoutX="525.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" text="Cancel" />
