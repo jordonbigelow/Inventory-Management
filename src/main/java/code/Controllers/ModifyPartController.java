@@ -1,8 +1,10 @@
 package code.Controllers;
 
 import code.Models.InHouse;
+import code.Models.Inventory;
 import code.Models.Outsourced;
 import code.Models.Part;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,7 +17,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
+
 public class ModifyPartController implements Initializable {
+    private static ObservableList<Part> currentList = Inventory.getAllParts();
     private static Part selectedPart;
     public RadioButton inHouseRadio;
     public ToggleGroup tGroup;
@@ -34,14 +40,51 @@ public class ModifyPartController implements Initializable {
     public void handleInHouseRadioAction(ActionEvent actionEvent) {
         changeableText.setText("Machine Id");
     }
-    // these to in house and out sourced buttons need to be selected by the program
-    // they need to import the data that is being passed and select one of the
-    // options based on the data that was passed to the controller
+
     public void handleOutsourcedRadioAction(ActionEvent actionEvent) {
         changeableText.setText("Company Name");
     }
 
-    public void handleSaveButtonAction(ActionEvent actionEvent) {
+    public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
+        if (inHouseRadio.isSelected()) {
+            InHouse inHousePart = new InHouse(
+                    parseInt(idField.getText()),
+                    nameField.getText(),
+                    parseDouble(priceField.getText()),
+                    parseInt(inventoryField.getText()),
+                    parseInt(minimumField.getText()),
+                    parseInt(maximumField.getText()),
+                    parseInt(changeableField.getText())
+            );
+            currentList.set(getIndexOfPart(selectedPart), inHousePart);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+            Scene scene= new Scene(root1,966,361);
+            stage.setTitle("Inventory CRM");
+            stage.setScene(scene);
+            stage.show();
+        } else if (outsourcedRadio.isSelected()) {
+            Outsourced outSourcedPart = new Outsourced(
+                    parseInt(idField.getText()),
+                    nameField.getText(),
+                    parseDouble(priceField.getText()),
+                    parseInt(inventoryField.getText()),
+                    parseInt(minimumField.getText()),
+                    parseInt(maximumField.getText()),
+                    changeableField.getText()
+            );
+            currentList.set(getIndexOfPart(selectedPart), outSourcedPart);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+            Scene scene= new Scene(root1,966,361);
+            stage.setTitle("Inventory CRM");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     public void handleCancelButtonAction(ActionEvent actionEvent) throws IOException {
@@ -56,6 +99,16 @@ public class ModifyPartController implements Initializable {
 
     public static void setSelectedPart(Part part) {
         selectedPart = part;
+    }
+
+    private static int getIndexOfPart(Part part) {
+        int index = 0;
+        for (Part currentPart : currentList) {
+            if (part.getId() == currentPart.getId()) {
+                index = currentList.indexOf(currentPart);
+            }
+        }
+        return index;
     }
 
     public void initialize (URL location, ResourceBundle resourceBundle) {
