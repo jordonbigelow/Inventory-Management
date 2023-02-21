@@ -64,7 +64,7 @@ public class AddPartController {
             stage.show();
         } else if (outsourcedRadio.isSelected()) {
             Outsourced outSourcedPart = new Outsourced(
-                    nextProductsId,
+                    nextPartsId,
                     nameField.getText(),
                     parseDouble(priceField.getText()),
                     parseInt(inventoryField.getText()),
@@ -72,7 +72,7 @@ public class AddPartController {
                     parseInt(maximumField.getText()),
                     changeableField.getText()
             );
-            nextProductsId += 1;
+            nextPartsId += 1;
             Inventory.addPart(outSourcedPart);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();

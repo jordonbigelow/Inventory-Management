@@ -105,17 +105,26 @@ public class MainScreenController implements Initializable {
     public void handleAddProductsButtonAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/AddProduct.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root1, 850, 550);
         stage.setTitle("Add Product");
-        stage.setScene(new Scene(root1));
+        stage.setScene(scene);
         stage.show();
     }
     public void handleModifyProductsButtonAction(ActionEvent actionEvent) throws IOException {
+        Product selectedProduct = (Product) productsTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct == null) {
+            return;
+        }
+        ModifyProductController.setSelectedProduct(selectedProduct);
+        ModifyProductController.setAssociatedPartsList(selectedProduct);
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/ModifyProduct.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root1, 850, 550);
         stage.setTitle("Modify Product");
-        stage.setScene(new Scene(root1));
+        stage.setScene(scene);
         stage.show();
     }
     public void handleDeleteProductsButtonAction(ActionEvent actionEvent) throws IOException {

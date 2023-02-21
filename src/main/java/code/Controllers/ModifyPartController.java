@@ -1,9 +1,6 @@
 package code.Controllers;
 
-import code.Models.InHouse;
-import code.Models.Inventory;
-import code.Models.Outsourced;
-import code.Models.Part;
+import code.Models.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +20,7 @@ import static java.lang.Integer.parseInt;
 public class ModifyPartController implements Initializable {
     private static ObservableList<Part> currentList = Inventory.getAllParts();
     private static Part selectedPart;
+    private static Product selectedProduct;
     public RadioButton inHouseRadio;
     public ToggleGroup tGroup;
     public RadioButton outsourcedRadio;
@@ -56,7 +54,7 @@ public class ModifyPartController implements Initializable {
                     parseInt(maximumField.getText()),
                     parseInt(changeableField.getText())
             );
-            currentList.set(getIndexOfPart(selectedPart), inHousePart);
+            Inventory.updatePart(getIndexOfPart(selectedPart), inHousePart);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -75,7 +73,7 @@ public class ModifyPartController implements Initializable {
                     parseInt(maximumField.getText()),
                     changeableField.getText()
             );
-            currentList.set(getIndexOfPart(selectedPart), outSourcedPart);
+            Inventory.updatePart(getIndexOfPart(selectedPart), outSourcedPart);
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -101,7 +99,7 @@ public class ModifyPartController implements Initializable {
         selectedPart = part;
     }
 
-    private static int getIndexOfPart(Part part) {
+    public static int getIndexOfPart(Part part) {
         int index = 0;
         for (Part currentPart : currentList) {
             if (part.getId() == currentPart.getId()) {

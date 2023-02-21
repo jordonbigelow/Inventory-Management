@@ -3,10 +3,12 @@ package code.Models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import static code.Controllers.ModifyPartController.getIndexOfPart;
+import static code.Controllers.ModifyProductController.getIndexOfProduct;
+
 public class Inventory {
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
-
 
     public static void addPart(Part newPart) {
         allParts.add(newPart);
@@ -104,8 +106,14 @@ public class Inventory {
         }
         return foundProducts;
     }
-    // TODO come up with a better way to generate ID numbers this one sucks
-    // it creates duplicate numbers if items are deleted
+
+    public static void updatePart(int index, Part selectedPart) {
+        allParts.set(getIndexOfPart(selectedPart), selectedPart);
+    }
+
+    public static void updateProduct(int index, Product newProduct) {
+        allProducts.set(getIndexOfProduct(newProduct), newProduct);
+    }
     public static int nextPartsId = allParts.size() + 1;
     public static int nextProductsId = allProducts.size() + 1;
 }
