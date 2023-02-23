@@ -45,6 +45,53 @@ public class ModifyPartController implements Initializable {
 
     public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
         if (inHouseRadio.isSelected()) {
+            if (nameField.getText().isEmpty()) {
+                System.out.println("name cannot be blank");
+                return;
+            }
+
+            try {
+                parseInt(inventoryField.getText());
+            } catch (NumberFormatException e) {
+                System.out.println("inventory must be a number, cannot be blank");
+                return;
+            }
+
+            try {
+                parseDouble(priceField.getText());
+            } catch (NumberFormatException e) {
+                // if given an int it will convert to a double with one digit after the decimal
+                // may have to do this differently
+                System.out.println("number must be in decimal format with two digits on the end, cannot be blank");
+                return;
+            }
+
+            try {
+                parseInt(minimumField.getText());
+            } catch (NumberFormatException e) {
+                System.out.println("minimum must be a number, cannot be blank");
+                return;
+            }
+
+            try {
+                parseInt(maximumField.getText());
+            } catch (NumberFormatException e) {
+                System.out.println("maximum must be a number, cannot be blank");
+                return;
+            }
+
+            if (parseInt(minimumField.getText()) > parseInt(maximumField.getText())) {
+                System.out.println("minimum cannot be greater than maximum");
+                return;
+            }
+
+            try {
+                parseInt(changeableField.getText());
+            } catch (NumberFormatException e) {
+                System.out.println("machine id must be a number, cannot be blank");
+                return;
+            }
+
             InHouse inHousePart = new InHouse(
                     parseInt(idField.getText()),
                     nameField.getText(),
@@ -55,14 +102,6 @@ public class ModifyPartController implements Initializable {
                     parseInt(changeableField.getText())
             );
             Inventory.updatePart(getIndexOfPart(selectedPart), inHousePart);
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-            Scene scene= new Scene(root1,966,361);
-            stage.setTitle("Inventory CRM");
-            stage.setScene(scene);
-            stage.show();
         } else if (outsourcedRadio.isSelected()) {
             Outsourced outSourcedPart = new Outsourced(
                     parseInt(idField.getText()),
@@ -74,15 +113,14 @@ public class ModifyPartController implements Initializable {
                     changeableField.getText()
             );
             Inventory.updatePart(getIndexOfPart(selectedPart), outSourcedPart);
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-            Scene scene= new Scene(root1,966,361);
-            stage.setTitle("Inventory CRM");
-            stage.setScene(scene);
-            stage.show();
         }
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        Scene scene= new Scene(root1,966,361);
+        stage.setTitle("Inventory CRM");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void handleCancelButtonAction(ActionEvent actionEvent) throws IOException {
