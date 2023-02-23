@@ -20,7 +20,6 @@ import static java.lang.Integer.parseInt;
 public class ModifyPartController implements Initializable {
     private static ObservableList<Part> currentList = Inventory.getAllParts();
     private static Part selectedPart;
-    private static Product selectedProduct;
     public RadioButton inHouseRadio;
     public ToggleGroup tGroup;
     public RadioButton outsourcedRadio;

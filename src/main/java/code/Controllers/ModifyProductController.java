@@ -91,6 +91,46 @@ public class ModifyProductController implements Initializable {
     }
 
     public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
+        if (nameField.getText().isEmpty()) {
+            System.out.println("name is blank");
+            return;
+        }
+
+        try {
+            parseInt(inventoryField.getText());
+        } catch (NumberFormatException e) {
+            System.out.println("inventory must be a number, cannot be blank");
+            return;
+        }
+
+        try {
+            parseDouble(priceField.getText());
+        } catch (NumberFormatException e) {
+            // if given an int it will convert to a double with one digit after the decimal
+            // may have to do this differently
+            System.out.println("number must be in decimal format with two digits on the end, cannot be blank");
+            return;
+        }
+
+        try {
+            parseInt(minimumField.getText());
+        } catch (NumberFormatException e) {
+            System.out.println("minimum must be a number, cannot be blank");
+            return;
+        }
+
+        try {
+            parseInt(maximumField.getText());
+        } catch (NumberFormatException e) {
+            System.out.println("maximum must be a number, cannot be blank");
+            return;
+        }
+
+        if (parseInt(minimumField.getText()) > parseInt(maximumField.getText())) {
+            System.out.println("minimum cannot be greater than maximum");
+            return;
+        }
+        
         Product newProduct = new Product(
                 parseInt(idField.getText()),
                 nameField.getText(),
