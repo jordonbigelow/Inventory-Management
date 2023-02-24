@@ -17,7 +17,7 @@ public class Inventory {
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
-
+/*
     // Test Data
     static {
         addTestData();
@@ -45,7 +45,7 @@ public class Inventory {
         Product testProduct4 = new Product(4, "skateboard", 49.99, 10, 1, 10);
         Inventory.addProduct(testProduct4);
     }
-
+*/
     public static ObservableList<Part> getAllParts() {
         return allParts;
     }

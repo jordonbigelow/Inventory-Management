@@ -7,7 +7,7 @@ public class InHouse extends Part{
     private int machineId;
 
     /**
-     * This contstructs the InHouse Object
+     * This constructs the InHouse Object
      * @param id
      * @param name
      * @param price
