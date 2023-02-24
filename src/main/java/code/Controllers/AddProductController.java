@@ -10,15 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static code.Models.Inventory.nextProductsId;
@@ -26,7 +24,6 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class AddProductController implements Initializable {
-    private static ObservableList<Part> currentList = Inventory.getAllParts();
     private static ObservableList<Part> addAssociatedParts = FXCollections.observableArrayList();
     public TextField idField;
     public TextField nameField;
@@ -52,14 +49,22 @@ public class AddProductController implements Initializable {
 
     public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
         if (nameField.getText().isEmpty()) {
-            System.out.println("name is blank");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing Data");
+            alert.setContentText("Name cannot be blank.");
+            alert.showAndWait();
             return;
         }
 
         try {
             parseInt(inventoryField.getText());
         } catch (NumberFormatException e) {
-            System.out.println("inventory must be a number, cannot be blank");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing/Wrong Data");
+            alert.setContentText("Inventory must be a number, cannot be blank.");
+            alert.showAndWait();
             return;
         }
 
@@ -68,26 +73,52 @@ public class AddProductController implements Initializable {
         } catch (NumberFormatException e) {
             // if given an int it will convert to a double with one digit after the decimal
             // may have to do this differently
-            System.out.println("number must be in decimal format with two digits on the end, cannot be blank");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing/Wrong Data");
+            alert.setContentText("Price must be a decimal number with two trailing digits (just like money), cannot be blank.");
+            alert.showAndWait();
             return;
         }
 
         try {
             parseInt(minimumField.getText());
         } catch (NumberFormatException e) {
-            System.out.println("minimum must be a number, cannot be blank");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing/Wrong Data");
+            alert.setContentText("Minimum must be a number, cannot be blank.");
+            alert.showAndWait();
             return;
         }
 
         try {
             parseInt(maximumField.getText());
         } catch (NumberFormatException e) {
-            System.out.println("maximum must be a number, cannot be blank");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Missing/Wrong Data");
+            alert.setContentText("Maximum must be a number, cannot be blank.");
+            alert.showAndWait();
             return;
         }
 
         if (parseInt(minimumField.getText()) > parseInt(maximumField.getText())) {
-            System.out.println("minimum cannot be greater than maximum");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Wrong Value");
+            alert.setContentText("Minimum must not be greater than maximum.");
+            alert.showAndWait();
+            return;
+        }
+
+        if (parseInt(inventoryField.getText()) < parseInt(minimumField.getText()) ||
+                parseInt(inventoryField.getText()) > parseInt(maximumField.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Wrong Value");
+            alert.setContentText("Inventory must not be greater than maximum or less than minimum.");
+            alert.showAndWait();
             return;
         }
 
@@ -146,6 +177,8 @@ public class AddProductController implements Initializable {
     }
 
     public void handlePartLookup(ActionEvent actionEvent) {
+        //TODO USE THIS CODE FOR THE OTHER PRODUCT LOOKUP AS WELL AS THE PART LOOKUP IN THE ADD/MODIFY PRODUCT SECTION
+
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
         String text = partsSearchField.getText();
         try {
@@ -155,14 +188,30 @@ public class AddProductController implements Initializable {
             if (foundPart != null) {
                 foundParts.add(foundPart);
                 partsTable.setItems(foundParts);
-            }
-        } catch (NumberFormatException e) {
-            if (!text.isBlank() || !text.isEmpty()) {
-                ObservableList<Part> foundPartsList = Inventory.lookupPart(text);
-                partsTable.setItems(foundPartsList);
             } else {
-                partsTable.setItems(Inventory.getAllParts());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Data");
+                alert.setHeaderText("Can't find");
+                alert.setContentText("Cannot find that part.");
+                alert.showAndWait();
             }
+            return;
+        } catch (NumberFormatException e) {
+            // Ignore error
+        }
+        if (!text.isBlank() || !text.isEmpty()) {
+            ObservableList<Part> foundPartsList = Inventory.lookupPart(text);
+            if (foundPartsList.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Data");
+                alert.setHeaderText("Can't find");
+                alert.setContentText("Cannot find that part.");
+                alert.showAndWait();
+            } else {
+                partsTable.setItems(foundPartsList);
+            }
+        } else {
+            partsTable.setItems(Inventory.getAllParts());
         }
     }
 
@@ -179,6 +228,13 @@ public class AddProductController implements Initializable {
         if (selectedPart == null) {
             return;
         }
-        addAssociatedParts.remove(selectedPart);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Deletion Confirmation");
+        alert.setContentText("Are you ok with this?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            addAssociatedParts.remove(selectedPart);
+        }
     }
 }

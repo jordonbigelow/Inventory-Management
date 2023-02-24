@@ -7,10 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -45,14 +42,22 @@ public class AddPartController {
     public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
         if (inHouseRadio.isSelected()) {
             if (nameField.getText().isEmpty()) {
-                System.out.println("name is blank");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing Data");
+                alert.setContentText("Name cannot be blank.");
+                alert.showAndWait();
                 return;
             }
 
             try {
                 parseInt(inventoryField.getText());
             } catch (NumberFormatException e) {
-                System.out.println("inventory must be a number, cannot be blank");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Inventory must be a number, cannot be blank.");
+                alert.showAndWait();
                 return;
             }
 
@@ -61,33 +66,63 @@ public class AddPartController {
             } catch (NumberFormatException e) {
                 // if given an int it will convert to a double with one digit after the decimal
                 // may have to do this differently
-                System.out.println("number must be in decimal format with two digits on the end, cannot be blank");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Price must be a decimal number with two trailing digits (just like money), cannot be blank.");
+                alert.showAndWait();
                 return;
             }
 
             try {
                 parseInt(minimumField.getText());
             } catch (NumberFormatException e) {
-                System.out.println("minimum must be a number, cannot be blank");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Minimum must be a number, cannot be blank.");
+                alert.showAndWait();
                 return;
             }
 
             try {
                 parseInt(maximumField.getText());
             } catch (NumberFormatException e) {
-                System.out.println("maximum must be a number, cannot be blank");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Maximum must be a number, cannot be blank.");
+                alert.showAndWait();
                 return;
             }
 
             if (parseInt(minimumField.getText()) > parseInt(maximumField.getText())) {
-                System.out.println("minimum cannot be greater than maximum");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Wrong Value");
+                alert.setContentText("Minimum must not be greater than maximum.");
+                alert.showAndWait();
+                return;
+            }
+
+            if (parseInt(inventoryField.getText()) < parseInt(minimumField.getText()) ||
+                    parseInt(inventoryField.getText()) > parseInt(maximumField.getText())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Wrong Value");
+                alert.setContentText("Inventory must not be greater than maximum or less than minimum.");
+                alert.showAndWait();
                 return;
             }
 
             try {
                 parseInt(changeableField.getText());
             } catch (NumberFormatException e) {
-                System.out.println("machine id must be a number, cannot be blank");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Machine ID must be a number, cannot be blank.");
+                alert.showAndWait();
                 return;
             }
 
@@ -102,6 +137,89 @@ public class AddPartController {
                     );
             Inventory.addPart(inHousePart);
         } else if (outsourcedRadio.isSelected()) {
+            if (nameField.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing Data");
+                alert.setContentText("Name cannot be blank.");
+                alert.showAndWait();
+                return;
+            }
+
+            try {
+                parseInt(inventoryField.getText());
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Inventory must be a number, cannot be blank.");
+                alert.showAndWait();
+                return;
+            }
+
+            try {
+                parseDouble(priceField.getText());
+            } catch (NumberFormatException e) {
+                // if given an int it will convert to a double with one digit after the decimal
+                // may have to do this differently
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Price must be a decimal number with two trailing digits (just like money), cannot be blank.");
+                alert.showAndWait();
+                return;
+            }
+
+            try {
+                parseInt(minimumField.getText());
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Minimum must be a number, cannot be blank.");
+                alert.showAndWait();
+                return;
+            }
+
+            try {
+                parseInt(maximumField.getText());
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Maximum must be a number, cannot be blank.");
+                alert.showAndWait();
+                return;
+            }
+
+            if (parseInt(minimumField.getText()) > parseInt(maximumField.getText())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Wrong Value");
+                alert.setContentText("Minimum must not be greater than maximum.");
+                alert.showAndWait();
+                return;
+            }
+
+            if (parseInt(inventoryField.getText()) < parseInt(minimumField.getText()) ||
+                    parseInt(inventoryField.getText()) > parseInt(maximumField.getText())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Wrong Value");
+                alert.setContentText("Inventory must not be greater than maximum or less than minimum.");
+                alert.showAndWait();
+                return;
+            }
+
+            if (changeableField.getText().isBlank()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Missing/Wrong Data");
+                alert.setContentText("Company Name cannot be blank.");
+                alert.showAndWait();
+                return;
+            }
+
             Outsourced outSourcedPart = new Outsourced(
                     nextPartsId,
                     nameField.getText(),

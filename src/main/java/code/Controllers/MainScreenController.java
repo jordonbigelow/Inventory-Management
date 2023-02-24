@@ -11,15 +11,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static code.Models.Inventory.*;
@@ -95,13 +93,6 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public void handleDeletePartButtonAction(ActionEvent actionEvent) {
-        Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
-        if (selectedPart == null) {
-            return;
-        }
-        Inventory.deletePart(selectedPart);
-    }
     public void handleAddProductsButtonAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/AddProduct.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
@@ -127,12 +118,46 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    public void handleDeletePartButtonAction(ActionEvent actionEvent) {
+        Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
+        // TODO
+        // https://code.makery.ch/blog/javafx-dialogs-official/
+
+        if (selectedPart == null) {
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Deletion Confirmation");
+        alert.setContentText("Are you ok with this?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            Inventory.deletePart(selectedPart);
+        }
+    }
     public void handleDeleteProductsButtonAction(ActionEvent actionEvent) throws IOException {
         Product selectedProduct = (Product) productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) {
             return;
         }
-        Inventory.deleteProduct(selectedProduct);
+        // TODO MAKE THIS BE NOT A MESSAGE BUT A PERMISSION/CONFIRMATION BEFORE DELETION
+        if (selectedProduct.getAllAssociatedParts().size() == 0) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Deletion Confirmation");
+            alert.setContentText("Are you ok with this?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                Inventory.deleteProduct(selectedProduct);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Cannot Delete Product");
+            alert.setContentText("You cannot delete a product with an associated part. Please remove the associated Part in the Modify Product window and try again.");
+            alert.showAndWait();
+        }
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -160,14 +185,30 @@ public class MainScreenController implements Initializable {
             if (foundPart != null) {
                 foundParts.add(foundPart);
                 partsTable.setItems(foundParts);
-            }
-        } catch (NumberFormatException e) {
-            if (!text.isBlank() || !text.isEmpty()) {
-                ObservableList<Part> foundPartsList = Inventory.lookupPart(text);
-                partsTable.setItems(foundPartsList);
             } else {
-                partsTable.setItems(Inventory.getAllParts());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Data");
+                alert.setHeaderText("Can't find");
+                alert.setContentText("Cannot find that part.");
+                alert.showAndWait();
             }
+            return;
+        } catch (NumberFormatException e) {
+            // Ignore error
+        }
+        if (!text.isBlank() || !text.isEmpty()) {
+            ObservableList<Part> foundPartsList = Inventory.lookupPart(text);
+            if (foundPartsList.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Data");
+                alert.setHeaderText("Can't find");
+                alert.setContentText("Cannot find that part.");
+                alert.showAndWait();
+            } else {
+                partsTable.setItems(foundPartsList);
+            }
+        } else {
+            partsTable.setItems(Inventory.getAllParts());
         }
     }
 
@@ -181,14 +222,30 @@ public class MainScreenController implements Initializable {
             if (foundProduct != null) {
                 foundProducts.add(foundProduct);
                 productsTable.setItems(foundProducts);
-            }
-        } catch (NumberFormatException e) {
-            if (!text.isBlank() || !text.isEmpty()) {
-                ObservableList<Product> foundProductsList = Inventory.lookupProduct(text);
-                productsTable.setItems(foundProductsList);
             } else {
-                productsTable.setItems(Inventory.getAllProducts());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Data");
+                alert.setHeaderText("Can't find");
+                alert.setContentText("Cannot find that product.");
+                alert.showAndWait();
             }
+            return;
+        } catch (NumberFormatException e) {
+            // Ignore exception
+        }
+        if (!text.isBlank() || !text.isEmpty()) {
+            ObservableList<Product> foundProductsList = Inventory.lookupProduct(text);
+            if (foundProductsList.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Data");
+                alert.setHeaderText("Can't find");
+                alert.setContentText("Cannot find that product.");
+                alert.showAndWait();
+            } else {
+                productsTable.setItems(foundProductsList);
+            }
+        } else {
+            productsTable.setItems(Inventory.getAllProducts());
         }
     }
 }
