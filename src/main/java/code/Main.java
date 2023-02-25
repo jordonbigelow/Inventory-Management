@@ -15,7 +15,7 @@ public class Main extends Application {
      * This is the start method. This method creates the code to load the fxml file to display the "Main Screen" window.
      * JAVADOCS FOLDER LOCATION: located inside my project in the javaDocs folder.
      * FUTURE ENHANCEMENTS: I would like error handling to be implemented to handle negative numbers in the fields.
-     * Meaning, provide errors for when a user enters in a negative number.
+     * Meaning, provide errors for when a user enters a negative number.
      * @param stage This is the variable that represents the fxml window to be displayed.
      * @throws IOException This will throw an exception if the window can't be loaded.
      */
