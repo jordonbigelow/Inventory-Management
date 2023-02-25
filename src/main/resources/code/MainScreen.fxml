@@ -45,6 +45,6 @@
             <Button fx:id="productsDeleteButton" layoutX="412.0" layoutY="219.0" mnemonicParsing="false" onAction="#handleDeleteProductsButtonAction" text="Delete" />
          </children>
       </AnchorPane>
-      <Button fx:id="exitButton" layoutX="918.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleExitButtonAction" text="Exit" />
+      <Button fx:id="exitButton" layoutX="917.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleExitButtonAction" text="Exit" />
    </children>
 </AnchorPane>
