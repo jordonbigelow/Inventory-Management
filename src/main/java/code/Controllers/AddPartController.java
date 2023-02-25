@@ -89,8 +89,6 @@ public class AddPartController {
             try {
                 parseDouble(priceField.getText());
             } catch (NumberFormatException e) {
-                // if given an int it will convert to a double with one digit after the decimal
-                // may have to do this differently
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Missing/Wrong Data");
