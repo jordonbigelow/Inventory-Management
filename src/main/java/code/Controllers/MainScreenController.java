@@ -185,6 +185,11 @@ public class MainScreenController implements Initializable {
     public void handleDeleteProductsButtonAction(ActionEvent actionEvent) throws IOException {
         Product selectedProduct = (Product) productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Select a Product");
+            alert.setHeaderText("Deletion Error");
+            alert.setContentText("Please select a Product.");
+            Optional<ButtonType> result = alert.showAndWait();
             return;
         }
         if (selectedProduct.getAllAssociatedParts().size() == 0) {
@@ -203,9 +208,7 @@ public class MainScreenController implements Initializable {
             alert.setContentText("You cannot delete a product with an associated part. Please remove the associated Part in the Modify Product window and try again.");
             alert.showAndWait();
         }
-
     }
-
     /**
      * This is the initialize method.
      * It populates the parts table view, and product table view.
