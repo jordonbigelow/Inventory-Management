@@ -250,6 +250,11 @@ public class AddProductController implements Initializable {
     public void handleAddButtonAction(ActionEvent actionEvent) {
         Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Select a Part");
+            alert.setHeaderText("Add Association Error");
+            alert.setContentText("Please select a Part.");
+            Optional<ButtonType> result = alert.showAndWait();
             return;
         }
         addAssociatedParts.add(selectedPart);
@@ -263,6 +268,11 @@ public class AddProductController implements Initializable {
     public void handleRemoveButtonAction(ActionEvent actionEvent) {
         Part selectedPart = (Part) associatedPartsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Select a Part");
+            alert.setHeaderText("Deletion Error");
+            alert.setContentText("Please select a Part.");
+            Optional<ButtonType> result = alert.showAndWait();
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

@@ -102,6 +102,11 @@ public class MainScreenController implements Initializable {
     public void handleModifyPartButtonAction(ActionEvent event) throws IOException {
         Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Select a Part");
+            alert.setHeaderText("Modify Error");
+            alert.setContentText("Please select a Part.");
+            Optional<ButtonType> result = alert.showAndWait();
             return;
         }
         ModifyPartController.setSelectedPart(selectedPart);
@@ -140,6 +145,11 @@ public class MainScreenController implements Initializable {
     public void handleModifyProductsButtonAction(ActionEvent actionEvent) throws IOException {
         Product selectedProduct = (Product) productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Select a Product");
+            alert.setHeaderText("Modify Error");
+            alert.setContentText("Please select a Product.");
+            Optional<ButtonType> result = alert.showAndWait();
             return;
         }
         ModifyProductController.setSelectedProduct(selectedProduct);
