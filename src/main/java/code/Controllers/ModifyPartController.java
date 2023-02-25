@@ -17,6 +17,10 @@ import java.util.ResourceBundle;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
+/**
+ * This is the class for the Modify Part Window.
+ * This contains data and methods for everything inside of this window.
+ */
 public class ModifyPartController implements Initializable {
     private static ObservableList<Part> currentList = Inventory.getAllParts();
     private static Part selectedPart;
@@ -34,14 +38,31 @@ public class ModifyPartController implements Initializable {
     public Button saveButton;
     public Button cancelButton;
 
+    /**
+     * This method handles the event when the In-house radio button is selected.
+     * It changes the label text to Machine ID.
+     * @param actionEvent This is the event that triggers the method call.
+     */
     public void handleInHouseRadioAction(ActionEvent actionEvent) {
         changeableText.setText("Machine Id");
     }
 
+    /**
+     * This method handles the even when the Outsourced radio button is selected.
+     * It changes the label text to Company Name.
+     * @param actionEvent This is the event that triggers the method call.
+     */
     public void handleOutsourcedRadioAction(ActionEvent actionEvent) {
         changeableText.setText("Company Name");
     }
 
+    /**
+     * This method handles everything that occurs when the Save button is clicked.
+     * This method "sets" the data in the text fields into the observable array list at the index of the selected object on the main screen parts table view.
+     * So it replaces the data that existed there before.
+     * @param actionEvent This is the action that triggers the method call.
+     * @throws IOException If there is an exception it is thrown.
+     */
     public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
         if (inHouseRadio.isSelected()) {
             if (nameField.getText().isEmpty()) {
@@ -242,6 +263,12 @@ public class ModifyPartController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method handles the action when the cancel button is clicked.
+     * When the button is clicked, the "Main Screen" window is generated, and the Modify Part window is closed.
+     * @param actionEvent This is the action that calls this method.
+     * @throws IOException If there is an issue with opening the new window, an exception is generated and reported.
+     */
     public void handleCancelButtonAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
@@ -252,10 +279,19 @@ public class ModifyPartController implements Initializable {
         stage.show();
     }
 
+    /**
+     * set selected part.
+     * @param part part passed to the method.
+     */
     public static void setSelectedPart(Part part) {
         selectedPart = part;
     }
 
+    /**
+     * This method gets the index of a selected part from a table view.
+     * @param part This is the part that is selected.
+     * @return This is the index in the observable array list of the selected part.
+     */
     public static int getIndexOfPart(Part part) {
         int index = 0;
         for (Part currentPart : currentList) {
@@ -266,6 +302,13 @@ public class ModifyPartController implements Initializable {
         return index;
     }
 
+    /**
+     * This is the initialize method.
+     * This method brings all the data from the "selected part" to this class.
+     * It then displays it in all the text fields.
+     * @param location the location.
+     * @param resourceBundle the resource bundle.
+     */
     public void initialize (URL location, ResourceBundle resourceBundle) {
         if (selectedPart instanceof InHouse) {
             changeableText.setText("Machine Id");

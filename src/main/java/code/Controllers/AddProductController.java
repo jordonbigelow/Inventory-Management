@@ -23,6 +23,10 @@ import static code.Models.Inventory.nextProductsId;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
+/**
+ * This is the Add Product Controller class.
+ * This class contains all the data and methods necessary for all the content in the add product window.
+ */
 public class AddProductController implements Initializable {
     private static ObservableList<Part> addAssociatedParts = FXCollections.observableArrayList();
     public TextField idField;
@@ -47,6 +51,14 @@ public class AddProductController implements Initializable {
     public TableColumn associatedInventoryLevel;
     public TableColumn associatedPartCost;
 
+    /**
+     * This is the handler for when the save button is clicked.
+     * It creates a Product object storing all the text field data in the variables.
+     * Data validation occurs before the insert.
+     * It then inserts it into an observable array list.
+     * @param actionEvent This is the action that calls the method.
+     * @throws IOException If an exception occurs, it is thrown.
+     */
     public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
         if (nameField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -71,8 +83,6 @@ public class AddProductController implements Initializable {
         try {
             parseDouble(priceField.getText());
         } catch (NumberFormatException e) {
-            // if given an int it will convert to a double with one digit after the decimal
-            // may have to do this differently
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Missing/Wrong Data");
@@ -149,6 +159,12 @@ public class AddProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the handler for when then cancel button is clicked.
+     * It opens the "Main Screen" window and closes this window.
+     * @param actionEvent This is the action that called the method.
+     * @throws IOException If an exception occurs, it is thrown.
+     */
     public void handleCancelButtonAction(ActionEvent actionEvent) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
@@ -159,6 +175,13 @@ public class AddProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the initialize method.
+     * This method is called when the window opens.
+     * It generates the data for the parts table view and associated parts table view.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         partsTable.setItems(Inventory.getAllParts());
@@ -176,9 +199,13 @@ public class AddProductController implements Initializable {
         associatedPartCost.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    /**
+     * This is the handler for when somebody uses the search field for the parts.
+     * It searches through the found parts observable array.
+     * If it finds a match it changes the content being displayed in the table view.
+     * @param actionEvent this is the action that called the method.
+     */
     public void handlePartLookup(ActionEvent actionEvent) {
-        //TODO USE THIS CODE FOR THE OTHER PRODUCT LOOKUP AS WELL AS THE PART LOOKUP IN THE ADD/MODIFY PRODUCT SECTION
-
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
         String text = partsSearchField.getText();
         try {
@@ -215,6 +242,11 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * This is the handler for the add button.
+     * When the add button is clicked, an associated part is added to an observable array list.
+     * @param actionEvent This is the action that called the method.
+     */
     public void handleAddButtonAction(ActionEvent actionEvent) {
         Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) {
@@ -223,6 +255,11 @@ public class AddProductController implements Initializable {
         addAssociatedParts.add(selectedPart);
     }
 
+    /**
+     * This is the handler for the remove button below the associated parts table.
+     * When it is clicked, a confirmation window pops up to confirm the deletion before it occurs.
+     * @param actionEvent This is the action that called the method.
+     */
     public void handleRemoveButtonAction(ActionEvent actionEvent) {
         Part selectedPart = (Part) associatedPartsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) {
@@ -233,7 +270,7 @@ public class AddProductController implements Initializable {
         alert.setHeaderText("Deletion Confirmation");
         alert.setContentText("Are you ok with this?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             addAssociatedParts.remove(selectedPart);
         }
     }

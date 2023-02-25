@@ -20,6 +20,10 @@ import java.util.ResourceBundle;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
+/**
+ * This is the class for the Modify Product window.
+ * It contains all the data and methods necessary for the Modify Product window.
+ */
 public class ModifyProductController implements Initializable {
     private static ObservableList<Product> currentList = Inventory.getAllProducts();
     private static ObservableList<Part> currentAssociatedParts = FXCollections.observableArrayList();
@@ -46,6 +50,11 @@ public class ModifyProductController implements Initializable {
     public TableColumn associatedPartCost;
     public Button removeButton;
 
+    /**
+     * This method returns the index in the observable array list for the product passed to it.
+     * @param product the product being passed as an argument.
+     * @return this returns the index of the passed product in the array.
+     */
     public static int getIndexOfProduct(Product product) {
         int index = 0;
         for (Product currentProduct : currentList) {
@@ -56,14 +65,28 @@ public class ModifyProductController implements Initializable {
         return index;
     }
 
+    /**
+     * This method sets the data for the selected product from the previous "Main screen" window.
+     * @param product the product being passed to the method (the selected product from the table view).
+     */
     public static void setSelectedProduct(Product product) {
         selectedProduct = product;
     }
 
+    /**
+     * This method sets the associated parts for the product object.
+     * @param product the product being passed to the method (the selected product from the table view).
+     */
     public static void setAssociatedPartsList(Product product) {
         currentAssociatedParts = product.getAllAssociatedParts();
     }
 
+    /**
+     * This is the initialize method.
+     * It sets the data for the parts and associated parts tables.
+     * @param url the passed url.
+     * @param resourceBundle the passed resource bundle.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         idField.setText(Integer.toString(selectedProduct.getId()));
@@ -88,6 +111,13 @@ public class ModifyProductController implements Initializable {
         associatedPartCost.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    /**
+     * This is the handler for the save button.
+     * When the button is clicked a modified product is set at the selected products index with any associated parts as well.
+     * Data validation occurs before the object is created.
+     * @param actionEvent The action that called the method.
+     * @throws IOException If an exception occurs, it is thrown.
+     */
     public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
         if (nameField.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -188,6 +218,12 @@ public class ModifyProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the handler for the cancel button.
+     * If the cancel button is clicked, the "Main Screen" is opened, and this window is closed.
+     * @param actionEvent The action that called the method.
+     * @throws IOException If an exception occurs, it is thrown.
+     */
     public void handleCancelButtonAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
@@ -198,9 +234,12 @@ public class ModifyProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the handler method for the part lookup search field.
+     * It will filter the table view based on the search results.
+     * @param actionEvent the action that called the method.
+     */
     public void handlePartLookup(ActionEvent actionEvent) {
-        //TODO USE THIS CODE FOR THE OTHER PRODUCT LOOKUP AS WELL AS THE PART LOOKUP IN THE ADD/MODIFY PRODUCT SECTION
-
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
         String text = partsSearchField.getText();
         try {
@@ -236,6 +275,12 @@ public class ModifyProductController implements Initializable {
             partsTable.setItems(Inventory.getAllParts());
         }
     }
+
+    /**
+     * This is the handler for the add button.
+     * When the add button is clicked, a part object from the parts table is added to the associated parts table.
+     * @param actionEvent the action that called the method.
+     */
     public void handleAddButtonAction(ActionEvent actionEvent) {
         Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) {
@@ -243,6 +288,12 @@ public class ModifyProductController implements Initializable {
         }
         currentAssociatedParts.add(selectedPart);
     }
+
+    /**
+     * This is the handler for the remove button.
+     * When the remove associated parts button is clicked, the selected part is removed from the current associated parts observable array list.
+     * @param actionEvent the action that called the method.
+     */
     public void handleRemoveButtonAction(ActionEvent actionEvent) {
         Part selectedPart = (Part) associatedPartsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) {

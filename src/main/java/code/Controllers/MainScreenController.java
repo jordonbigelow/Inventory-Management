@@ -66,7 +66,15 @@ public class MainScreenController implements Initializable {
     public void handleExitButtonAction() {
         System.exit(0);
     }
-    @FXML
+
+    /**
+     * This is the method that handles the add part button click.
+     * When this button is clicked. It generates the "Add Part" window.
+     * RUNTIME ERROR: Location not set.
+     * I fixed this error by correcting the path to the "AddPart.fxml".
+     * @param event this is the event that calls this method.
+     * @throws IOException If the window cannot open an exception is created and reported.
+     */
     public void handleAddPartButtonAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/AddPart.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
@@ -77,6 +85,12 @@ public class MainScreenController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the handler for the modify button under the parts table view.
+     * When the modify button is clicked, the selected object data will be passed to the "Modify Part" window, and that window is opened.
+     * @param event the action that called the method.
+     * @throws IOException if an exception occurs, it is thrown.
+     */
     @FXML
     public void handleModifyPartButtonAction(ActionEvent event) throws IOException {
         Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
@@ -93,6 +107,13 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * This is the handler for the add button below the products table view.
+     * When the add button is clicked, the "Add Product" window is generated and opened, and the "Main Screen" window is closed.
+     * @param actionEvent the action that called the method.
+     * @throws IOException if an exception occurs, it is thrown.
+     */
     public void handleAddProductsButtonAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/AddProduct.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
@@ -102,6 +123,13 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * This is the handler for the modify button under the products table view.
+     * When the modify button is clicked, the selected product data is sent to the "Modify Product" window, and the window is opened, and this window is closed.
+     * @param actionEvent The action that called this method.
+     * @throws IOException If an exception occurs, it is thrown.
+     */
     public void handleModifyProductsButtonAction(ActionEvent actionEvent) throws IOException {
         Product selectedProduct = (Product) productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) {
@@ -118,12 +146,23 @@ public class MainScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * This is the handler for the delete button under the parts table view.
+     * When the delete button is clicked, a confirmation window appears, if the user clicks ok, the selected part is deleted from the observable array list.
+     * @param actionEvent the action that called this method.
+     */
     public void handleDeletePartButtonAction(ActionEvent actionEvent) {
         Part selectedPart = (Part) partsTable.getSelectionModel().getSelectedItem();
         // TODO
         // https://code.makery.ch/blog/javafx-dialogs-official/
 
         if (selectedPart == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Select a Part");
+            alert.setHeaderText("Deletion Error");
+            alert.setContentText("Please select a Part.");
+            Optional<ButtonType> result = alert.showAndWait();
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -131,16 +170,23 @@ public class MainScreenController implements Initializable {
         alert.setHeaderText("Deletion Confirmation");
         alert.setContentText("Are you ok with this?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             Inventory.deletePart(selectedPart);
         }
     }
+
+    /**
+     * This is the handler for the delete button under the products table view.
+     * When the delete button is clicked, the method checks if the product has associated parts,
+     * if it doesn't, the part is deleted from the observable array list.
+     * @param actionEvent The action that called the method.
+     * @throws IOException If an exception occurs, it is thrown.
+     */
     public void handleDeleteProductsButtonAction(ActionEvent actionEvent) throws IOException {
         Product selectedProduct = (Product) productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct == null) {
             return;
         }
-        // TODO MAKE THIS BE NOT A MESSAGE BUT A PERMISSION/CONFIRMATION BEFORE DELETION
         if (selectedProduct.getAllAssociatedParts().size() == 0) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
@@ -159,6 +205,13 @@ public class MainScreenController implements Initializable {
         }
 
     }
+
+    /**
+     * This is the initialize method.
+     * It populates the parts table view, and product table view.
+     * @param url the url.
+     * @param resourceBundle the resource bundle.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         partsTable.setItems(Inventory.getAllParts());
@@ -175,6 +228,11 @@ public class MainScreenController implements Initializable {
         productCostPerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
+    /**
+     * This is the handler for the search field above the parts table view.
+     * When this handler is called the table view is updated with the found data, if it doesn't find any, an information window shows up.
+     * @param actionEvent the action that called the method.
+     */
     public void handlePartLookup(ActionEvent actionEvent) {
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
         String text = partsSearchField.getText();
@@ -212,6 +270,12 @@ public class MainScreenController implements Initializable {
         }
     }
 
+    /**
+     * This is the handler for the search field above the product table view.
+     * When this method is called, is populates the products table view with the found results.
+     * If it finds nothing, an information window appears.
+     * @param actionEvent the action that called this method.
+     */
     public void handleProductLookup(ActionEvent actionEvent) {
         ObservableList<Product> foundProducts = FXCollections.observableArrayList();
         String text = productsSearchField.getText();

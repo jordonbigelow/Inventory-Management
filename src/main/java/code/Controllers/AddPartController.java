@@ -17,6 +17,10 @@ import static code.Models.Inventory.nextProductsId;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
+/**
+ * This is the AddPartController Class.
+ * This is for all the data and methods used in the Add Part window.
+ */
 public class AddPartController {
     public RadioButton inHouseRadio;
     public RadioButton outsourcedRadio;
@@ -31,14 +35,35 @@ public class AddPartController {
     public Button cancelButton;
     public Label changeableText;
 
+    /**
+     * This is the handler for the In-House radio button.
+     * When the In-House radio button is selected, it sets the text of the
+     * changeableText field to "Machine ID".
+     * @param actionEvent This is the action event that triggers when this radio button is selected.
+     */
     public void handleInHouseRadioAction(ActionEvent actionEvent) {
         changeableText.setText("Machine Id");
     }
 
+    /**
+     * This is the handler for the Out-Sourced radio button.
+     * When the Out-Sourced radio button is selected, it sets the text of the changeableText field to "Company Name".
+     * @param actionEvent This is the action even that triggers when this radio button is selected.
+     */
     public void handleOutsourcedRadioAction(ActionEvent actionEvent) {
         changeableText.setText("Company Name");
     }
 
+    /**
+     * This is the handler for the Save Button.
+     * When the save button is clicked all the data from the text fields is used to create either an in-house part or an outsourced part.
+     *
+     * RUNTIME ERROR: NumberFormatException. I had this error when leaving one of the text fields blank that was being parsed to an int.
+     * I fixed it by using a try and catch block to catch the exception and print an alert to the user to explain the field cannot be blank.
+     *
+     * @param actionEvent This is the action event that triggers when the Save button is clicked.
+     * @throws IOException If something goes wrong during execution, this will throw the proper exception.
+     */
     public void handleSaveButtonAction(ActionEvent actionEvent) throws IOException {
         if (inHouseRadio.isSelected()) {
             if (nameField.getText().isEmpty()) {
@@ -241,7 +266,13 @@ public class AddPartController {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * This is the handler for the Cancel button.
+     * When the cancel button is clicked, the "Main Screen" window is loaded,
+     * and this window is closed.
+     * @param actionEvent This is the action event that occurs when the cancel button is clicked.
+     * @throws IOException If this method fails, an exception is generated and reported.
+     */
     public void handleCancelButtonAction(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/code/MainScreen.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
@@ -251,6 +282,4 @@ public class AddPartController {
         stage.setScene(scene);
         stage.show();
     }
-
-
 }
