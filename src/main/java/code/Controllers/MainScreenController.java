@@ -23,6 +23,10 @@ import java.util.ResourceBundle;
 import static code.Models.Inventory.*;
 import static java.lang.Integer.parseInt;
 
+/**
+ * This is the class for the Main Screen.
+ * All the methods and data in here are related to the tables, fields, and buttons.
+ */
 public class MainScreenController implements Initializable {
     @FXML
     public TextField partsSearchField;
@@ -63,6 +67,9 @@ public class MainScreenController implements Initializable {
     @FXML
     public TableColumn partCostPerUnit;
 
+    /**
+     * This method closes the application completely.
+     */
     public void handleExitButtonAction() {
         System.exit(0);
     }

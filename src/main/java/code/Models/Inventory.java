@@ -6,22 +6,42 @@ import javafx.collections.ObservableList;
 import static code.Controllers.ModifyPartController.getIndexOfPart;
 import static code.Controllers.ModifyProductController.getIndexOfProduct;
 
+/**
+ * This class is for the all the parts and products in the program.
+ * The data and methods within are for managing the parts and products in the inventory.
+ */
 public class Inventory {
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
+    /**
+     * This method adds a part that is passed to it into the "allParts" observable array list.
+     * @param newPart the part to be added.
+     */
     public static void addPart(Part newPart) {
         allParts.add(newPart);
     }
 
+    /**
+     * This method add a product that is passed to it into the "allProducts" observable array list.
+     * @param newProduct the product to be added.
+     */
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
 
+    /**
+     * This method calls the addTestData method when the program loads.
+     * It loads all the test data into the program.
+     */
     // Test Data
     static {
         addTestData();
     }
+
+    /**
+     * This method creates Part and Product objects and adds them to the observable array list to be displayed in the "Main Screen" window.
+     */
     // Test Data
     private static void addTestData() {
         Part testPart1 = new InHouse(1, "tire", 29.99, 5, 1, 5, 1);
@@ -46,22 +66,45 @@ public class Inventory {
         Inventory.addProduct(testProduct4);
     }
 
+    /**
+     * This method returns the allParts observable array list.
+     * @return returns the array.
+     */
     public static ObservableList<Part> getAllParts() {
         return allParts;
     }
 
+    /**
+     * This method returns the allProducts observable array list.
+     * @return returns the array.
+     */
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
 
+    /**
+     * This method removes a part from the observable array list.
+     * @param selectedPart the part to be removed.
+     * @return returns a boolean if the remove succeeds or fails.
+     */
     public static Boolean deletePart(Part selectedPart) {
         return allParts.remove(selectedPart);
     }
 
+    /**
+     * This method removes a product from the observable array list.
+     * @param selectedProduct the product to be removed.
+     * @return returns a boolean if the remove succeeds or fails.
+     */
     public static boolean deleteProduct(Product selectedProduct) {
         return allProducts.remove(selectedProduct);
     }
 
+    /**
+     * This method returns a part that is being searched for by its ID.
+     * @param partId the partId being searched for.
+     * @return returns the found part or returns null if it's not found.
+     */
     public static Part lookupPart(int partId) {
         ObservableList<Part> allParts = Inventory.getAllParts();
 
@@ -73,6 +116,11 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * This method returns a product that is being searched for by its ID.
+     * @param productId the productId being searched for.
+     * @return returns the found product, or returns null if it's not found.
+     */
     public static Product lookupProduct(int productId) {
         ObservableList<Product> allProducts = Inventory.getAllProducts();
 
@@ -84,6 +132,11 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * This method returns an observable array list that includes found parts.
+     * @param partName the partName being searched for.
+     * @return returns the observable array list that contains all found parts.
+     */
     public static ObservableList<Part> lookupPart(String partName) {
         ObservableList<Part> allParts = Inventory.getAllParts();
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
@@ -96,6 +149,11 @@ public class Inventory {
         return foundParts;
     }
 
+    /**
+     * This method returns an observable array list that includes found products.
+     * @param productName the productName being searched for.
+     * @return returns the observable array list that contains all found products.
+     */
     public static ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> allProducts = Inventory.getAllProducts();
         ObservableList<Product> foundProducts = FXCollections.observableArrayList();
@@ -108,10 +166,21 @@ public class Inventory {
         return foundProducts;
     }
 
+    /**
+     * This method is passed an index of a selected part, and the part itself to be inserted.
+     * It then inserts the part at the selected index.
+     * @param index the index of the selected part to be replaced.
+     * @param selectedPart the part that is to replace the selected part.
+     */
     public static void updatePart(int index, Part selectedPart) {
         allParts.set(getIndexOfPart(selectedPart), selectedPart);
     }
 
+    /**
+     * This method is passed an index of a selected product, and the product itself to be inserted.
+     * @param index the index of the selected product to be replaced.
+     * @param newProduct the part that is to replace the selected product.
+     */
     public static void updateProduct(int index, Product newProduct) {
         allProducts.set(getIndexOfProduct(newProduct), newProduct);
     }
